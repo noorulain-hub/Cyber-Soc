@@ -10,16 +10,17 @@
   </rule>
 
   <!-- Custom PowerShell Detection Rule -->
-  <rule id="100100" level="10">
-    <if_sid>60000</if_sid>
-    <field name="win.system.eventID">^4104$</field>
-    <field name="win.eventdata.scriptBlockText">CH_ENCODED_TEST_2026</field>
-    <description>CyberHawk: Encoded PowerShell test marker detected.</description>
-    <mitre>
-      <id>T1059.001</id>
-    </mitre>
-    <group>attack,windows,powershell,</group>
-  </rule>
+   
+<rule id="100100" level="10">
+  <if_sid>91802</if_sid>
+  <field name="win.system.eventID">^4104$</field>
+  <field name="win.eventdata.scriptBlockText">CH_ENCODED_TEST_2026</field>
+  <description>CyberHawk: Encoded PowerShell test marker detected.</description>
+  <mitre>
+    <id>T1059.001</id>
+  </mitre>
+  <group>attack,windows,powershell,</group>
+</rule>
 
   <!-- Custom Scheduled Task Detection Rule -->
   <rule id="100101" level="8">

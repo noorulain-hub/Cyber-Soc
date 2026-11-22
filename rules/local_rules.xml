@@ -1,0 +1,73 @@
+
+<group name="local,syslog,sshd,">
+
+  <!-- Example Rule -->
+  <rule id="100001" level="5">
+    <if_sid>5716</if_sid>
+    <srcip>1.1.1.1</srcip>
+    <description>sshd: authentication failed from IP 1.1.1.1.</description>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
+  </rule>
+
+  <!-- Custom PowerShell Detection Rule -->
+  <rule id="100100" level="10">
+    <if_sid>60000</if_sid>
+    <field name="win.system.eventID">^4104$</field>
+    <field name="win.eventdata.scriptBlockText">CH_ENCODED_TEST_2026</field>
+    <description>CyberHawk: Encoded PowerShell test marker detected.</description>
+    <mitre>
+      <id>T1059.001</id>
+    </mitre>
+    <group>attack,windows,powershell,</group>
+  </rule>
+
+  <!-- Custom Scheduled Task Detection Rule -->
+  <rule id="100101" level="8">
+    <if_sid>60228</if_sid>
+    <field name="win.eventdata.taskName">CyberHawk-TestTask</field>
+    <description>CyberHawk: Lab scheduled task creation detected.</description>
+    <mitre>
+      <id>T1053</id>
+    </mitre>
+    <group>attack,windows,scheduled_task,</group>
+  </rule>
+
+  <!-- Custom Windows Local User Account Creation Detection Rule -->
+  <rule id="100102" level="10">
+    <if_sid>60109</if_sid>
+    <field name="win.system.eventID">^4720$</field>
+    <field name="win.eventdata.targetUserName">CyberHawk-TestUser</field>
+    <description>CyberHawk: New Windows local user account creation detected.</description>
+    <mitre>
+      <id>T1136.001</id>
+    </mitre>
+    <group>attack,windows,account_creation,</group>
+  </rule>
+<!-- Custom Windows Account Deletion Detection Rule -->
+<rule id="100103" level="10">
+  <if_sid>60111</if_sid>
+  <field name="win.system.eventID">^4726$</field>
+  <field name="win.eventdata.targetUserName">CyberHawk-TestUser</field>
+  <description>CyberHawk: Windows local user account deletion detected.</description>
+  <mitre>
+    <id>T1531</id>
+  </mitre>
+  <group>attack,windows,account_deletion,</group>
+</rule>
+<rule id="100104" level="10">
+  <if_sid>60122</if_sid>
+  <field name="win.eventdata.targetUserName">^CyberHawk$</field>
+  <description>CyberHawk: Windows failed login attempt detected.</description>
+  <mitre>
+    <id>T1110</id>
+  </mitre>
+  <group>attack,windows,authentication_failed,</group>
+</rule>
+</group>
+
+
+
+
+
+
+
